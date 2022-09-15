@@ -15,7 +15,7 @@ class ProjectController extends Controller
     public function index()
     {
         //
-	    return view("Project.index");
+	    return view("project.index");
     }
 
     /**
@@ -26,6 +26,7 @@ class ProjectController extends Controller
     public function create()
     {
         //
+	    return view("project.create")->with(["statuses" => Project::getPossibleStatuses()]);
     }
 
     /**
