@@ -40,6 +40,11 @@
 	</div>
 </nav>
 <div class="container">
+	<div class="row">
+		<div class="col">
+			@include("inc.error")
+		</div>
+	</div>
 	@yield('content')
 </div>
 </body>

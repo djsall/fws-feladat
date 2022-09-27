@@ -34,7 +34,7 @@ class ProjectController extends Controller {
 	 * Store a newly created resource in storage.
 	 *
 	 * @param \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function store(Request $request) {
 
@@ -71,7 +71,6 @@ class ProjectController extends Controller {
 
 		return redirect(route("index"));
 
-
 	}
 
 	/**
@@ -81,7 +80,11 @@ class ProjectController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($projectId) {
-		//
+		$project = Project::find($projectId);
+		if (!$project)
+			return redirect(route("index"))->with([
+				"error" => "Nem található projekt."
+			]);
 	}
 
 	/**
