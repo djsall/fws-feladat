@@ -77,7 +77,7 @@ class ProjectController extends Controller {
 	 * Display the specified resource.
 	 *
 	 * @param \App\Models\Project $project
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function show($projectId) {
 		$project = Project::find($projectId);
@@ -85,16 +85,28 @@ class ProjectController extends Controller {
 			return redirect(route("index"))->with([
 				"error" => "Nem található projekt."
 			]);
+		return view("project.show")->with([
+			"project" => $project
+		]);
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
 	 * @param \App\Models\Project $project
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function edit($projectId) {
-		//
+		$project = Project::find($projectId);
+		if (!$project)
+			return redirect(route("index"))->with([
+				"error" => "Nem található projekt."
+			]);
+		return view("project.edit")->with([
+			"project" => $project,
+			"statuses" => Project::getPossibleStatuses()
+		]);
+
 	}
 
 	/**
@@ -106,6 +118,7 @@ class ProjectController extends Controller {
 	 */
 	public function update(Request $request, $projectId) {
 		//
+		dd($request->all());
 	}
 
 	/**
