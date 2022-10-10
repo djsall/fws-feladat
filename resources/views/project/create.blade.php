@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 	<form action="{{route("project.store")}}" method="post">
-		<div class="row mt-5">
+		<div class="row">
 			@csrf
 			<div class="col-4">
 				@if($errors->any())

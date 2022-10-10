@@ -2,7 +2,7 @@
 @section('content')
 	<div class="row">
 		<div class="col col-md-4 offset-md-4">
-			<div class="card mt-5 p-3">
+			<div class="card p-3">
 
 				<form action="{{ route("project.update", $project->id) }}" method="post">
 					@method("put")

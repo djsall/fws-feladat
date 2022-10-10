@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<div class="card mt-5 p-3">
+	<div class="card p-3">
 
 		<div class="row">
 			<div class="col d-flex justify-content-between">

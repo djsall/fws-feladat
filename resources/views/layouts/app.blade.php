@@ -19,7 +19,7 @@
 	</style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm mb-5">
 	<div class="container">
 		<a class="navbar-brand" href="{{ url('/') }}">
 			{{ config('app.name', 'Laravel') }}
@@ -34,11 +34,24 @@
 				<li class="nav-item">
 					<a href="{{ route('index') }}" class="nav-link @if(Route::is("index")) active @endif">Projektek</a>
 				</li>
+			</ul>
+			<ul class="navbar-nav ms-auto">
+				@if(Auth::user())
+					<li class="nav-item">
+						<span class="nav-link">
+
+							{{ Auth::user()->name }}
+						</span>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url('/logout') }}"> Logout </a>
+					</li>
+				@endif
 
 			</ul>
 		</div>
 	</div>
-{{--	TODO: handle login links--}}
+	{{--	TODO: handle login links--}}
 </nav>
 <div class="container">
 	<div class="row">
