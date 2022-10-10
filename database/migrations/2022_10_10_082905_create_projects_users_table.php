@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('projects_users', function (Blueprint $table) {
             $table->id();
-						$table->string("name")->comment("Kapcsolattartó neve");
-						$table->string("email")->comment("Kapcsolattartó email címe");
-						$table->unsignedBigInteger("project_id")->comment("Kapcsolattartóhoz rendelt projekt.");
+						$table->bigInteger("project_id");
 						$table->foreign("project_id")->references("id")->on("projects");
+						$table->bigInteger("user_id");
+						$table->foreign("user_id")->references("id")->on("users");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('projects_users');
     }
 };

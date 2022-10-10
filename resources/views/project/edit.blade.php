@@ -52,7 +52,7 @@
 
 			data.forEach(data => addInputPopulated(data));
 
-			function addInputPopulated(data){
+			function addInputPopulated(data) {
 
 				data = data || "";
 
@@ -73,7 +73,10 @@
 				let emailInput = $("<input>", {value: email, required: true, type: 'email', name: 'contacts[contact' + counter + '][email]'}).addClass("form-control");
 
 				labelLineParent.append(label);
-				labelLineParent.append(destroyBtn);
+
+				//TODO: decide if you should be able to delete contacts in here
+				if (!data)
+					labelLineParent.append(destroyBtn);
 
 				nameInput.appendTo(nameLabel);
 				emailInput.appendTo(emailLabel);
@@ -92,7 +95,7 @@
 
 			}
 
-			btn.on("click", addInputPopulated);
+			btn.on("click", () => addInputPopulated(""));
 
 		</script>
 @endsection
