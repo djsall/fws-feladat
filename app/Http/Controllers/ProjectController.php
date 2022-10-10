@@ -58,6 +58,7 @@ class ProjectController extends Controller {
 		$project->status = $data["status"];
 
 		$project->save();
+//		TODO: make contact selectable from users on server
 
 		foreach ($data["contacts"] as $contact) {
 			$contactModel = new Contact();

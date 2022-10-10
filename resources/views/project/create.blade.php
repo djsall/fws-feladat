@@ -28,6 +28,8 @@
 					</select>
 				</div>
 				<div class="d-flex justify-content-between mt-5 mb-2">
+{{--					//		TODO: make contact selectable from users on server
+--}}
 					<p class="form-label">Kapcsolattartók</p>
 					<button type="button" id="add-contact" class="btn btn-sm btn-primary">+</button>
 				</div>

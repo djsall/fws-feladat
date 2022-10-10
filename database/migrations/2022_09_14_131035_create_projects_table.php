@@ -18,7 +18,8 @@ return new class extends Migration
 						$table->string("name")->comment("Projekt neve");
 						$table->string("description")->comment("Projekt leírása");
 						$table->enum("status", ["awaiting_development", "in_progress", "completed"])->comment("Projekt státusza");
-						$table->bigInteger("owner_id")->comment("Tulajdonos user ID-je.");
+						$table->unsignedBigInteger("owner_id")->comment("Tulajdonos user ID-je.");
+						$table->foreign("owner_id")->references("id")->on("users");
             $table->timestamps();
         });
     }

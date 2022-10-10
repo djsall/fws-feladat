@@ -51,7 +51,6 @@
 			</ul>
 		</div>
 	</div>
-	{{--	TODO: handle login links--}}
 </nav>
 <div class="container">
 	<div class="row">

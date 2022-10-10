@@ -14,8 +14,12 @@ class Project extends Model {
 		"completed"            => "Kész"
 	];
 
+	public function owner() {
+		return $this->belongsTo(User::class);
+	}
+
 	public function contacts() {
-		return $this->hasMany(Contact::class);
+		return $this->belongsToMany(User::class);
 	}
 
 	public function getTranslatedStatus() {
@@ -23,7 +27,7 @@ class Project extends Model {
 		return self::$statuses[$this->status];
 	}
 
-	public static function getPossibleStatuses(){
+	public static function getPossibleStatuses() {
 		return self::$statuses;
 	}
 }
