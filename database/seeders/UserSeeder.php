@@ -19,7 +19,10 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
+
+
 	    $user = new User();
+			$user->id = 0;
 			$user->name = 'Levente Proksa';
 			$user->password = '$2y$10$QIJHp09DghAZxa6B/ht76.xnDXXZMwuzBmM4L6wpCCvGOKWPLbWTi';
 			$user->email = 'proksalevente@gmail.com';
