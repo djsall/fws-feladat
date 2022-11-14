@@ -6,6 +6,7 @@ use App\Models\Contact;
 use App\Models\Project;
 use App\Rules\ArrayAtLeastOneRequired;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller {
 	/**
@@ -47,20 +48,23 @@ class ProjectController extends Controller {
 			"name"             => "required",
 			"description"      => "required",
 			"status"           => "in:$statuses",
-			"contacts"         => "required|min:1",
-			"contacts.*.name"  => "string",
-			"contacts.*.email" => "email|unique:users"
+//			"contacts"         => "required|min:1",
+//			"contacts.*.name"  => "string",
+//			"contacts.*.email" => "email|unique:users"
 		]);
 
 		$project = new Project();
 		$project->name = $data["name"];
 		$project->description = $data["description"];
 		$project->status = $data["status"];
+		$project->owner_id = Auth::user()->id;
+
 
 		$project->save();
 //		TODO: make contact selectable from users on server
+		//TODO: save project owner
 
-		foreach ($data["contacts"] as $contact) {
+		/*foreach ($data["contacts"] as $contact) {
 			$contactModel = new Contact();
 
 			$contactModel->name = $contact["name"];
@@ -68,7 +72,7 @@ class ProjectController extends Controller {
 			$contactModel->project_id = $project->id;
 
 			$contactModel->save();
-		}
+		}*/
 
 		return redirect(route("index"));
 

@@ -24,14 +24,14 @@
 		</div>
 		<div class="row">
 
-			@foreach($project->contacts as $contact)
+			{{--@foreach($project->contacts as $contact)
 				<div class="col-3">
 					<div class="card p-2">
 						<p>Név: {{ $contact->name }}</p>
 						<p>Email: {{ $contact->email }}</p>
 					</div>
 				</div>
-			@endforeach
+			@endforeach--}}
 		</div>
 
 	</div>

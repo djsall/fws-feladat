@@ -33,7 +33,9 @@
 					<p class="form-label">Kapcsolattartók</p>
 					<button type="button" id="add-contact" class="btn btn-sm btn-primary">+</button>
 				</div>
-				<div id="contacts"></div>
+				<div id="contacts">
+
+				</div>
 				<div class="form-group mb-2 mt-5">
 					<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
 				</div>
