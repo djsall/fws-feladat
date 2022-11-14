@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -24,15 +26,6 @@ class UserSeeder extends Seeder
 
 			$user->save();
 
-			for ($i = 0; $i < 10; $i++){
-				$name = Str::random(10);
-
-				$user = new User();
-				$user->name = $name;
-				$user->email = $name . '@gmail.com';
-				$user->password = Hash::make('password');
-
-				$user->save();
-			}
+			User::factory(10);
     }
 }
