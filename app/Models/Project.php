@@ -23,8 +23,19 @@ class Project extends Model {
 	}
 
 	public function getTranslatedStatus() {
-
 		return self::$statuses[$this->status];
+	}
+
+	public function isPending(){
+		return $this->status == "awaiting_development";
+	}
+
+	public function isInProgress(){
+		return $this->status == "in_progress";
+	}
+
+	public function isCompleted(){
+		return $this->status == "completed";
 	}
 
 	public static function getPossibleStatuses() {

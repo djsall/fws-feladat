@@ -67,19 +67,6 @@ class ProjectController extends Controller {
 			$project->contacts()->attach($contact);
 		}
 
-//		TODO: make contact selectable from users on server
-		//TODO: save project owner
-
-		/*foreach ($data["contacts"] as $contact) {
-			$contactModel = new Contact();
-
-			$contactModel->name = $contact["name"];
-			$contactModel->email = $contact["email"];
-			$contactModel->project_id = $project->id;
-
-			$contactModel->save();
-		}*/
-
 		return redirect(route("index"));
 
 	}
@@ -165,7 +152,7 @@ class ProjectController extends Controller {
 			$project->contacts()->attach($contact);
 		}
 
-		return redirect(url()->previous())->with(["success" => "Sikeres módosítás"]);
+		return redirect(route("index"));
 	}
 
 	/**
