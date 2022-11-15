@@ -60,7 +60,7 @@ Route::middleware(["auth"])->group(function () {
 	])->name("project.update");
 
 //delete
-	Route::delete('/project/{projectId}/delete', [
+	Route::delete('/api/project/{projectId}/delete', [
 		ProjectController::class,
 		"destroy"
 	])->name("project.destroy");

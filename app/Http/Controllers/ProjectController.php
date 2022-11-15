@@ -157,13 +157,15 @@ class ProjectController extends Controller {
 
 	/**
 	 * Remove the specified resource from storage.
+	 * Specifically made for API requests.
 	 *
 	 * @param $projectId
-	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 * @return string
 	 */
 	public function destroy($projectId) {
-		$message = Project::find($projectId)->delete() ? ["success" => "Projekt sikeresen törölve."] : ["error" => "Nem sikerült a projekt törlése."];
+		$project = Project::find($projectId);
+		$project?->contacts()->detach();
 
-		return redirect(route("index"))->with($message);
+		return route("index");
 	}
 }

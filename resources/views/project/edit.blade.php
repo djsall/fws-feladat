@@ -39,13 +39,27 @@
 						</select>
 					</div>
 					<div id="contacts"></div>
-					<div class="form-group mb-2 mt-4">
+					<div class="form-group mt-4">
 						<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
+					</div>
+					<div class="form-group mb-2 mt-3">
+						<button type="button" id="delete-btn" class="btn btn-outline-danger btn-block w-100">Törlés</button>
 					</div>
 				</form>
 			</div>
 
 		</div>
 		<script type="module">
+			let deleteBtn = $("#delete-btn");
+			const url = `{!! route("project.destroy", $project->id) !!}`;
+			const projectId = {!! $project->id !!};
+
+			deleteBtn.click(function () {
+
+				axios.delete(url)
+					.then((res) => {
+						window.location.replace(res.data);
+					})
+			});
 		</script>
 @endsection
