@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 			Model::unguard();
-			Model::preventLazyLoading(App::environment("production"));
-			Model::preventSilentlyDiscardingAttributes(App::environment("production"));
+			Model::preventLazyLoading();
+			Model::preventSilentlyDiscardingAttributes();
         //
     }
 }

@@ -27,14 +27,13 @@
 						@endforeach
 					</select>
 				</div>
-				<div class="d-flex justify-content-between mt-5 mb-2">
-{{--					//		TODO: make contact selectable from users on server
---}}
-					<p class="form-label">Kapcsolattartók</p>
-					<button type="button" id="add-contact" class="btn btn-sm btn-primary">+</button>
-				</div>
-				<div id="contacts">
-
+				<div class="form-group mb-2">
+					<label class="form-label" for="contact[]">Kapcsolattartók</label>
+					<select name="contact[]" id="contact-original" class="form-select mb-2" required multiple>
+						@foreach($possible_contacts as $possible_contact)
+							<option value="{{$possible_contact->id}}">{{ $possible_contact->name }}</option>
+						@endforeach
+					</select>
 				</div>
 				<div class="form-group mb-2 mt-5">
 					<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
