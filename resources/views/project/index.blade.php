@@ -10,7 +10,7 @@
 					<div class="col">
 						<h1 class="fw-bold mb-4 mt-0">Projektek</h1>
 					</div>
-					<div class="col-2 me-3">
+					<div class="col-2 ">
 						<a href="{{route("project.create")}}" class="btn btn-primary w-100">Létrehozás</a>
 					</div>
 				</div>
