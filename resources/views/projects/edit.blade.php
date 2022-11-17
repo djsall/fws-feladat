@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 	<div class="row">
-		<div class="col col-md-4 offset-md-4">
+		<div class="col-xl-4 col-lg-6 offset-xl-4 offset-lg-3">
 			<div class="card p-3">
 
 				<form action="{{ route("projects.update", $project->id) }}" method="post">
@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="description" class="form-label">Projekt leírása:</label>
-						<input type="text" name="description" id="description" class="form-control" required value="{{ $project->description }}">
+						<textarea type="text" name="description" id="description" class="form-control" required >{{ $project->description }}</textarea>
 					</div>
 					<div class="form-group mb-2">
 						<label for="status">Projekt státusza:</label>
@@ -31,8 +31,8 @@
 						</select>
 					</div>
 					<div class="form-group mb-2">
-						<label class="form-label" for="contact[]">Kapcsolattartók</label>
-						<select name="contact[]" id="contact-original" class="form-select mb-2" required multiple>
+						<label class="form-label" for="contact[]">Kapcsolattartók:</label>
+						<select name="contact[]" id="contact[]" class="form-select mb-2" required multiple>
 							@foreach($possible_contacts as $possible_contact)
 								<option @if(in_array($possible_contact->id, $contact_ids)) selected @endif value="{{$possible_contact->id}}">{{ $possible_contact->name }}</option>
 							@endforeach

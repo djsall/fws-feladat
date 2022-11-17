@@ -4,7 +4,7 @@
 		<div class="col-12">
 			@if($tickets->count() == 0)
 				<h1 class="display-5">Még nem található ticket.</h1>
-				<a href="{{route("projects.create")}}" class="btn btn-success">Hozz létre egyet</a>
+				<a href="{{route("tickets.create")}}" class="btn btn-success">Hozz létre egyet</a>
 			@else
 				<div class="row">
 					<div class="col">
