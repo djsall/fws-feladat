@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col d-flex justify-content-between">
 				<h3>{{ $project->name }}</h3>
-				<a href="{{ route("project.edit", $project->id) }}" class="btn btn-primary">Szerkesztés</a>
+				<a href="{{ route("projects.edit", $project->id) }}" class="btn btn-primary">Szerkesztés</a>
 			</div>
 		</div>
 		<div class="row">

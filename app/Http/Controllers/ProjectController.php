@@ -16,7 +16,7 @@ class ProjectController extends Controller {
 	 */
 	public function index() {
 		//
-		return view("project.index")->with([
+		return view("projects.index")->with([
 			"projects" => Project::with("contacts")->paginate(10)
 		]);
 	}
@@ -28,7 +28,7 @@ class ProjectController extends Controller {
 	 */
 	public function create() {
 		//
-		return view("project.create")->with([
+		return view("projects.create")->with([
 			"statuses"          => Project::getPossibleStatuses(),
 			"possible_contacts" => User::all()->except(Auth::id())
 		]);
@@ -83,7 +83,7 @@ class ProjectController extends Controller {
 			return redirect(route("index"))->with([
 				"error" => "Nem található projekt."
 			]);
-		return view("project.show")->with([
+		return view("projects.show")->with([
 			"project" => $project
 		]);
 	}
@@ -107,7 +107,7 @@ class ProjectController extends Controller {
 				"error" => "Nem található projekt."
 			]);
 
-		return view("project.edit")->with([
+		return view("projects.edit")->with([
 			"project"           => $project,
 			"statuses"          => Project::getPossibleStatuses(),
 			"possible_contacts" => User::all()->except(Auth::id()),

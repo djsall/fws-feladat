@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<form action="{{route("project.store")}}" method="post">
+	<form action="{{route("projects.store")}}" method="post">
 		<div class="row">
 			@csrf
 			<div class="col-4">

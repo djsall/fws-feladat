@@ -32,10 +32,10 @@
 			<!-- Left Side Of Navbar -->
 			<ul class="navbar-nav me-auto">
 				<li class="nav-item">
-					<a href="{{ route('index') }}" class="nav-link @if(Route::is("index")) active @endif">Projektek</a>
+					<a href="{{ route('projects.index') }}" class="nav-link @if(Route::is("projects.*")) active @endif">Projektek</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{ route('tickets') }}" class="nav-link @if(Route::is("tickets")) active @endif"></a>
+					<a href="{{ route('tickets.index') }}" class="nav-link @if(Route::is("tickets.*")) active @endif">Ticketek</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav ms-auto">

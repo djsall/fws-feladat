@@ -4,7 +4,7 @@
 		<div class="col col-md-4 offset-md-4">
 			<div class="card p-3">
 
-				<form action="{{ route("project.update", $project->id) }}" method="post">
+				<form action="{{ route("projects.update", $project->id) }}" method="post">
 					@method("put")
 					@csrf
 					@if($errors->any())
@@ -51,7 +51,7 @@
 		</div>
 		<script type="module">
 			let deleteBtn = $("#delete-btn");
-			const url = `{!! route("project.destroy", $project->id) !!}`;
+			const url = `{!! route("projects.destroy", $project->id) !!}`;
 			const projectId = {!! $project->id !!};
 
 			deleteBtn.click(function () {

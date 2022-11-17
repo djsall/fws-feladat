@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,45 +24,46 @@ Route::get('/logout', [
 
 Route::middleware(["auth"])->group(function () {
 
-	Route::get('/', [
-		ProjectController::class,
-		"index"
-	])->name("index");
+	Route::get('/', function () {
+		return redirect(route("projects.index"));
+	})->name("index");
 
-	Route::get('/home', [
+	Route::get('/projects', [
 		ProjectController::class,
 		"index"
-	])->name("index");
+	])->name("projects.index");
 
 //create
 	Route::get('/project/create', [
 		ProjectController::class,
 		"create"
-	])->name("project.create");
+	])->name("projects.create");
 	Route::post('/project/create', [
 		ProjectController::class,
 		"store"
-	])->name("project.store");
+	])->name("projects.store");
 
 //show
 	Route::get('projects/{projectId}', [
 		ProjectController::class,
 		"show"
-	])->name("project.show");
+	])->name("projects.show");
 
 //update
 	Route::get('/projects/{projectId}/edit', [
 		ProjectController::class,
 		"edit"
-	])->name("project.edit");
+	])->name("projects.edit");
 	Route::put('/projects/{projectId}/edit', [
 		ProjectController::class,
 		"update"
-	])->name("project.update");
+	])->name("projects.update");
 
 //delete
 	Route::delete('/api/project/{projectId}/delete', [
 		ProjectController::class,
 		"destroy"
-	])->name("project.destroy");
+	])->name("projects.destroy");
+
+	Route::resource('tickets', TicketController::class);
 });

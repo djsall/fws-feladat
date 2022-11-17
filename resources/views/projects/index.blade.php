@@ -2,16 +2,16 @@
 @section('content')
 	<div class="row">
 		<div class="col-12">
-			@if(\App\Models\Project::all()->count() == 0)
+			@if($projects->count() == 0)
 				<h1 class="display-5">Még nem található projekt.</h1>
-				<a href="{{route("project.create")}}" class="btn btn-success">Hozz létre egyet</a>
+				<a href="{{route("projects.create")}}" class="btn btn-success">Hozz létre egyet</a>
 			@else
 				<div class="row">
 					<div class="col">
 						<h1 class="fw-bold mb-4 mt-0">Projektek</h1>
 					</div>
 					<div class="col-2 ">
-						<a href="{{route("project.create")}}" class="btn btn-primary w-100">Létrehozás</a>
+						<a href="{{route("projects.create")}}" class="btn btn-primary w-100">Létrehozás</a>
 					</div>
 				</div>
 			@endif
@@ -47,13 +47,12 @@
 							</ul>
 						@endif
 
-						<a href="{{route("project.edit", ["projectId"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
+						<a href="{{route("projects.edit", ["projectId"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
 					</div>
 				</div>
 			</div>
 		@endforeach
 		{{ $projects->links('pagination::bootstrap-5') }}
-	</div>
 	</div>
 
 @endsection
