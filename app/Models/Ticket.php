@@ -17,4 +17,16 @@ class Ticket extends Model {
 	public static function getPossibleStatuses() {
 		return self::$statuses;
 	}
+	public function isOpen(){
+		return $this->status == "open";
+	}
+	public function isInProgress(){
+		return $this->status == "in_progress";
+	}
+	public function isClosed(){
+		return $this->status == "closed";
+	}
+	public function getTranslatedStatus(){
+		return self::$statuses[$this->status];
+	}
 }

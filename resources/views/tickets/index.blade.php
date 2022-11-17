@@ -21,38 +21,38 @@
 		@php
 			/** @var \App\Models\Ticket $ticket	*/
 		@endphp
-		{{--@foreach($projects as $project)
+		@foreach($tickets as $ticket)
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-						<h4 class="card-title fw-bold mb-0">{{$project->name}}</h4>
+						<h4 class="card-title fw-bold mb-0">{{$ticket->name}}</h4>
 						<p class="card-text mb-1">
 							<span class="badge rounded-pill
-								@if($project->isCompleted()) bg-success @endif
-							@if($project->isInProgress()) bg-primary @endif
-							@if($project->isPending()) bg-warning @endif
+								@if($ticket->isClosed()) bg-success @endif
+							@if($ticket->isInProgress()) bg-primary @endif
+							@if($ticket->isOpen()) bg-warning @endif
 								">
-								{{$project->getTranslatedStatus()}}
+								{{$ticket->getTranslatedStatus()}}
 							</span>
 						</p>
 						<p class="card-text mb-1">
-							{{$project->description}}
+							{{$ticket->description}}
 						</p>
-						@if($project->contacts->count() > 0)
+						{{--@if($ticket->contacts->count() > 0)
 							<small class="text-muted">Kapcsolattartók:</small>
 							<ul class="list-group mb-3">
-								@foreach($project->contacts as $contact)
+								@foreach($ticket->contacts as $contact)
 									<li class="list-group-item">{{$contact->name}}</li>
 								@endforeach
 							</ul>
-						@endif
+						@endif--}}
 
-						<a href="{{route("projects.edit", ["projectId"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
+						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
 					</div>
 				</div>
 			</div>
 		@endforeach
-		{{ $projects->links('pagination::bootstrap-5') }}--}}
+		{{ $tickets->links('pagination::bootstrap-5') }}
 	</div>
 
 @endsection

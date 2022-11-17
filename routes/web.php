@@ -65,5 +65,11 @@ Route::middleware(["auth"])->group(function () {
 		"destroy"
 	])->name("projects.destroy");
 
-	Route::resource('tickets', TicketController::class);
+	Route::resource('tickets', TicketController::class, ['except' => ['destroy']]);
+
+	//delete
+	Route::delete('/api/tickets/{ticket}/delete', [
+		TicketController::class,
+		"destroy"
+	])->name("tickets.destroy");
 });
