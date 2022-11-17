@@ -55,16 +55,16 @@ class ProjectController extends Controller {
 			"contact.*"   => "int"
 		]);
 
-		$project = new Project();
-		$project->name = $data["name"];
-		$project->description = $data["description"];
-		$project->status = $data["status"];
-		$project->owner_id = Auth::user()->id;
+		$projectInstance = new Project();
+		$projectInstance->name = $data["name"];
+		$projectInstance->description = $data["description"];
+		$projectInstance->status = $data["status"];
+		$projectInstance->owner_id = Auth::user()->id;
 
-		$project->save();
+		$projectInstance->save();
 
 		foreach ($data["contact"] as $contact) {
-			$project->contacts()->attach($contact);
+			$projectInstance->contacts()->attach($contact);
 		}
 
 		return redirect(route("index"));
@@ -74,41 +74,41 @@ class ProjectController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param $projectId
+	 * @param $project
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
-	public function show($projectId) {
-		$project = Project::find($projectId);
-		if (!$project)
+	public function show($project) {
+		$projectInstance = Project::find($project);
+		if (!$projectInstance)
 			return redirect(route("index"))->with([
 				"error" => "Nem található projekt."
 			]);
 		return view("projects.show")->with([
-			"project" => $project
+			"project" => $projectInstance
 		]);
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param $projectId
+	 * @param $project
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function edit($projectId) {
-		$project = Project::find($projectId);
+	public function edit($project) {
+		$projectInstance = Project::find($project);
 
 		$contactIDs = [];
-		foreach ($project->contacts as $contact) {
+		foreach ($projectInstance->contacts as $contact) {
 			$contactIDs[] = $contact->id;
 		}
 
-		if (!$project)
+		if (!$projectInstance)
 			return redirect(route("index"))->with([
 				"error" => "Nem található projekt."
 			]);
 
 		return view("projects.edit")->with([
-			"project"           => $project,
+			"project"           => $projectInstance,
 			"statuses"          => Project::getPossibleStatuses(),
 			"possible_contacts" => User::all()->except(Auth::id()),
 			"contact_ids"       => $contactIDs,
@@ -120,10 +120,10 @@ class ProjectController extends Controller {
 	 * Update the specified resource in storage.
 	 *
 	 * @param Request $request
-	 * @param $projectId
+	 * @param $project
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function update(Request $request, $projectId) {
+	public function update(Request $request, $project) {
 		//
 		$statuses = "";
 		foreach (Project::$statuses as $status => $val) {
@@ -138,18 +138,18 @@ class ProjectController extends Controller {
 			"contact.*"   => "int"
 		]);
 
-		$project = Project::findOrFail($projectId);
-		$project->name = $data["name"];
-		$project->description = $data["description"];
-		$project->status = $data["status"];
-		$project->owner_id = Auth::user()->id;
+		$projectInstance = Project::findOrFail($project);
+		$projectInstance->name = $data["name"];
+		$projectInstance->description = $data["description"];
+		$projectInstance->status = $data["status"];
+		$projectInstance->owner_id = Auth::user()->id;
 
-		$project->save();
+		$projectInstance->save();
 
-		$project->contacts()->detach();
+		$projectInstance->contacts()->detach();
 
 		foreach ($data["contact"] as $contact) {
-			$project->contacts()->attach($contact);
+			$projectInstance->contacts()->attach($contact);
 		}
 
 		return redirect(route("index"));
@@ -159,14 +159,14 @@ class ProjectController extends Controller {
 	 * Remove the specified resource from storage.
 	 * Specifically made for API requests.
 	 *
-	 * @param $projectId
+	 * @param $project
 	 * @return string
 	 */
-	public function destroy($projectId) {
-		$project = Project::find($projectId);
-		if ($project->contacts->count() > 0)
-			$project?->contacts()->detach();
-		$project?->delete();
+	public function destroy($project) {
+		$projectInstance = Project::find($project);
+		if ($projectInstance->contacts->count() > 0)
+			$projectInstance?->contacts()->detach();
+		$projectInstance?->delete();
 
 		return route("index");
 	}

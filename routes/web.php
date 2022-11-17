@@ -27,37 +27,8 @@ Route::middleware(["auth"])->group(function () {
 	Route::get('/', function () {
 		return redirect(route("projects.index"));
 	})->name("index");
-
-	Route::get('/projects', [
-		ProjectController::class,
-		"index"
-	])->name("projects.index");
-
-//create
-	Route::get('/project/create', [
-		ProjectController::class,
-		"create"
-	])->name("projects.create");
-	Route::post('/project/create', [
-		ProjectController::class,
-		"store"
-	])->name("projects.store");
-
-//show
-	Route::get('projects/{projectId}', [
-		ProjectController::class,
-		"show"
-	])->name("projects.show");
-
-//update
-	Route::get('/projects/{projectId}/edit', [
-		ProjectController::class,
-		"edit"
-	])->name("projects.edit");
-	Route::put('/projects/{projectId}/edit', [
-		ProjectController::class,
-		"update"
-	])->name("projects.update");
+	
+	Route::resource("projects", ProjectController::class, ['except' => ['destroy']]);
 
 //delete
 	Route::delete('/api/project/{projectId}/delete', [

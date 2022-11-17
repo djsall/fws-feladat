@@ -47,7 +47,7 @@
 							</ul>
 						@endif
 
-						<a href="{{route("projects.edit", ["projectId"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
+						<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
 					</div>
 				</div>
 			</div>
