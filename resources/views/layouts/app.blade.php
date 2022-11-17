@@ -34,6 +34,9 @@
 				<li class="nav-item">
 					<a href="{{ route('index') }}" class="nav-link @if(Route::is("index")) active @endif">Projektek</a>
 				</li>
+				<li class="nav-item">
+					<a href="{{ route('tickets') }}" class="nav-link @if(Route::is("tickets")) active @endif"></a>
+				</li>
 			</ul>
 			<ul class="navbar-nav ms-auto">
 				@if(Auth::user())
