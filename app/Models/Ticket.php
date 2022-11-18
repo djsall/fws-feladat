@@ -14,6 +14,10 @@ class Ticket extends Model {
 
 	use HasFactory;
 
+	public function project(){
+		return $this->belongsTo(Project::class);
+	}
+
 	public static function getPossibleStatuses() {
 		return self::$statuses;
 	}

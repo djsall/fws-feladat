@@ -20,9 +20,9 @@ class ProjectFactory extends Factory
     {
         return [
             "name" => fake()->jobTitle(),
-            "description" => 'Placeholder project description',
+            "description" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda corporis magnam molestiae non officiis sint sit, ut? Ab aliquam aperiam est, et fugit harum libero, minima neque, officiis quidem velit!",
             "status" => "in_progress",
-            "owner_id" => User::find(rand(1, User::all()->count())),
+            "user_id" => User::find(rand(2, User::all()->count())),
         ];
     }
 }

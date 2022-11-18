@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
 						$table->string("name");
-						$table->string("description");
+						$table->text("description");
 						$table->enum("status", ["open", "in_progress", "closed"]);
 						$table->unsignedBigInteger("created_by");
 						$table->foreign("created_by")->references("id")->on("users");
-						$table->unsignedBigInteger("project");
-						$table->foreign("project")->references("id")->on("projects");
+						$table->unsignedBigInteger("project_id");
+						$table->foreign("project_id")->references("id")->on("projects");
             $table->timestamps();
         });
     }

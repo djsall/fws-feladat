@@ -25,17 +25,19 @@
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-						<h4 class="card-title fw-bold mb-0">{{$ticket->name}}</h4>
-						<p class="card-text mb-1">
+						<h5 class="card-title fw-bold mb-1">{{$ticket->name}}
 							<span class="badge rounded-pill
-								@if($ticket->isClosed()) bg-success @endif
-							@if($ticket->isInProgress()) bg-primary @endif
-							@if($ticket->isOpen()) bg-warning @endif
+							@if($ticket->isClosed())        bg-success @endif
+							@if($ticket->isInProgress())    bg-primary @endif
+							@if($ticket->isOpen())          bg-warning @endif
 								">
 								{{$ticket->getTranslatedStatus()}}
 							</span>
-						</p>
-						<p class="card-text mb-1">
+						</h5>
+						<h5 class="text-muted mb-3 mt-0">
+							{{$ticket->project->name}}
+						</h5>
+						<p class="card-text mb-4">
 							{{$ticket->description}}
 						</p>
 						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>

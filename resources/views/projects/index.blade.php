@@ -19,23 +19,26 @@
 	</div>
 	<div class="row">
 		@php
-		/** @var \App\Models\Project $project	*/
+			/** @var \App\Models\Project $project	*/
 		@endphp
 		@foreach($projects as $project)
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-						<h4 class="card-title fw-bold mb-0">{{$project->name}}</h4>
-						<p class="card-text mb-1">
+						<h5 class="card-title fw-bold mb-1">
+							{{$project->name}}
 							<span class="badge rounded-pill
 								@if($project->isCompleted()) bg-success @endif
-								@if($project->isInProgress()) bg-primary @endif
-								@if($project->isPending()) bg-warning @endif
-">
+							@if($project->isInProgress()) bg-primary @endif
+							@if($project->isPending()) bg-warning @endif
+								">
 								{{$project->getTranslatedStatus()}}
 							</span>
+						</h5>
+						<p class="small text-muted">
+							Ticketek: {{ $project->tickets->count() }} db
 						</p>
-						<p class="card-text mb-1">
+						<p class="card-text mb-3">
 							{{$project->description}}
 						</p>
 						@if($project->contacts->count() > 0)

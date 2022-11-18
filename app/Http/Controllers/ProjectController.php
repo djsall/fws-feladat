@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller {
 	/**
@@ -17,7 +18,7 @@ class ProjectController extends Controller {
 	public function index() {
 		//
 		return view("projects.index")->with([
-			"projects" => Project::with("contacts")->paginate(10)
+			"projects" => Project::with("contacts", "tickets")->paginate(12)
 		]);
 	}
 
@@ -57,9 +58,9 @@ class ProjectController extends Controller {
 
 		$projectInstance = new Project();
 		$projectInstance->name = $data["name"];
-		$projectInstance->description = $data["description"];
+		$projectInstance->description = Str::limit($data["description"], 65000);
 		$projectInstance->status = $data["status"];
-		$projectInstance->owner_id = Auth::user()->id;
+		$projectInstance->user_id = Auth::user()->id;
 
 		$projectInstance->save();
 
@@ -142,7 +143,7 @@ class ProjectController extends Controller {
 		$projectInstance->name = $data["name"];
 		$projectInstance->description = $data["description"];
 		$projectInstance->status = $data["status"];
-		$projectInstance->owner_id = Auth::user()->id;
+		$projectInstance->user_id = Auth::user()->id;
 
 		$projectInstance->save();
 

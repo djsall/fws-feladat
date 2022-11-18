@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller {
 	/**
@@ -16,7 +17,7 @@ class TicketController extends Controller {
 	public function index() {
 		//
 		return view("tickets.index")->with([
-			"tickets" => Ticket::paginate(10)
+			"tickets" => Ticket::with('project')->paginate(12)
 		]);
 	}
 
@@ -96,7 +97,7 @@ class TicketController extends Controller {
 
 		$ticketInstance = Ticket::find($ticket);
 		$ticketInstance->name = $data["name"];
-		$ticketInstance->description = $data["description"];
+		$ticketInstance->description = Str::limit($data["description"], 65000);
 		$ticketInstance->status = $data["status"];
 		$ticketInstance->save();
 
