@@ -10,7 +10,7 @@
 					<div class="col">
 						<h1 class="fw-bold mb-4 mt-0">Ticketek</h1>
 					</div>
-					<div class="col-2 ">
+					<div class="col-3 col-md-2">
 						<a href="{{route("tickets.create")}}" class="btn btn-primary w-100">Létrehozás</a>
 					</div>
 				</div>
