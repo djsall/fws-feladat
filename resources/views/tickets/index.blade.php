@@ -38,15 +38,6 @@
 						<p class="card-text mb-1">
 							{{$ticket->description}}
 						</p>
-						{{--@if($ticket->contacts->count() > 0)
-							<small class="text-muted">Kapcsolattartók:</small>
-							<ul class="list-group mb-3">
-								@foreach($ticket->contacts as $contact)
-									<li class="list-group-item">{{$contact->name}}</li>
-								@endforeach
-							</ul>
-						@endif--}}
-
 						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
 					</div>
 				</div>

@@ -27,7 +27,7 @@ Route::middleware(["auth"])->group(function () {
 	Route::get('/', function () {
 		return redirect(route("projects.index"));
 	})->name("index");
-	
+
 	Route::resource("projects", ProjectController::class, ['except' => ['destroy']]);
 
 //delete

@@ -78,10 +78,29 @@ class TicketController extends Controller {
 	 *
 	 * @param \Illuminate\Http\Request $request
 	 * @param \App\Models\Ticket $ticket
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
-	public function update(Request $request, Ticket $ticket) {
+	public function update(Request $request, $ticket) {
 		//
+		$statuses = "";
+
+		foreach (Ticket::$statuses as $key => $status){
+			$statuses .= $key . ",";
+		}
+
+		$data = $this->validate($request, [
+			"name"        => "string|required",
+			"description" => "string|required",
+			"status" => "in:$statuses"
+		]);
+
+		$ticketInstance = Ticket::find($ticket);
+		$ticketInstance->name = $data["name"];
+		$ticketInstance->description = $data["description"];
+		$ticketInstance->status = $data["status"];
+		$ticketInstance->save();
+
+		return redirect(route("tickets.index"));
 	}
 
 	/**

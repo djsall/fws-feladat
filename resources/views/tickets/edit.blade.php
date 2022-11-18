@@ -3,8 +3,9 @@
 	<div class="row">
 		<div class="col-xl-4 col-lg-6 offset-xl-4 offset-lg-3">
 			<div class="card p-3">
-				<form action="{{route("tickets.store")}}" method="post">
+				<form action="{{route("tickets.update", $ticket->id)}}" method="post">
 					@csrf
+					@method("put")
 					@if($errors->any())
 						<div class="form-group">
 							{!! implode('', $errors->all('<div>:message</div>')) !!}
@@ -23,9 +24,8 @@
 					<div class="form-group mb-2">
 						<label for="status">Ticket státusza:</label>
 						<select name="status" id="status" class="form-select" required>
-							{{--						TODO: select active status here--}}
 							@foreach($statuses as $key => $status)
-								<option value="{{$key}}"> {{$status}}</option>
+								<option @if($ticket->status == $key) selected @endif value="{{$key}}"> {{$status}}</option>
 							@endforeach
 						</select>
 					</div>
