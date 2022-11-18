@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="description" class="form-label">Projekt leírása:</label>
-						<textarea type="text" name="description" id="description" class="form-control" required >{{ $project->description }}</textarea>
+						<textarea rows="6" type="text" name="description" id="description" class="form-control" required >{{ $project->description }}</textarea>
 					</div>
 					<div class="form-group mb-2">
 						<label for="status">Projekt státusza:</label>

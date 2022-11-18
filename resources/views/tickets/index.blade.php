@@ -35,7 +35,9 @@
 							</span>
 						</h5>
 						<h5 class="text-muted mb-3 mt-0">
-							{{$ticket->project->name}}
+							<a href="{{ route("projects.edit", $ticket->project->id) }}" class="text-muted">
+								{{$ticket->project->name}}
+							</a>
 						</h5>
 						<p class="card-text mb-4">
 							{{$ticket->description}}

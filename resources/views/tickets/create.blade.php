@@ -18,7 +18,7 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="description" class="form-label">Ticket leírása:</label>
-						<textarea type="text" name="description" id="description" class="form-control" required></textarea>
+						<textarea rows="6" type="text" name="description" id="description" class="form-control" required></textarea>
 					</div>
 					<div class="form-group mb-2">
 						<label for="project">Projekt:</label>
