@@ -25,7 +25,6 @@
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-
 						<h4 class="card-title fw-bold mb-1">
 							<a class="text-black" href="{{ route("tickets.show", $ticket->id) }}">
 								{{$ticket->name}}
