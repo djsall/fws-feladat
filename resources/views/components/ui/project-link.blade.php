@@ -6,7 +6,7 @@
 			</p>
 		</div>
 		<div class="w-100 text-end">
-			<a href="{{ route("projects.edit", $ticket->project->id) }}" class="">
+			<a href="{{ route("projects.edit", $ticket->project->id) }}" class="text-muted">
 				{{$ticket->project->name}}
 			</a>
 		</div>
