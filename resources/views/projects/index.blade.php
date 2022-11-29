@@ -25,47 +25,36 @@
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-						<h5 class="card-title fw-bold mb-2">
-							{{$project->name}}
-							<span class="badge rounded-pill
-								@if($project->isCompleted()) bg-success @endif
-							@if($project->isInProgress()) bg-primary @endif
-							@if($project->isPending()) bg-warning @endif
-								">
-								{{$project->getTranslatedStatus()}}
-							</span>
-						</h5>
+						<h4 class="card-title mb-2">
+							<a class="text-black fw-bold" href="{{ route("projects.show", $project->id) }}">
+								{{$project->name}}
+							</a>
+						</h4>
+						<x-ui.status :project="$project"/>
 						@if($project->tickets->count() > 0)
-						<p class="small text-muted mb-0">
-							Ticketek:
-						</p>
-							<ul class="list-group mb-4">
-								@foreach($project->tickets as $ticket)
-									<li class="list-group-item">
-										<a class="text-black" href="{{ route("tickets.edit", $ticket->id) }}">
-											{{$ticket->name}}
-										</a>
-									</li>
-								@endforeach
-							</ul>
+							<div class="mb-3">
+								<a class="small text-muted" href="{{ route("projects.show", $project->id) }}">{{$project->tickets->count()}} db ticket összesen.</a>
+							</div>
 						@else
-							<p class="small text-muted mb-3">
-								Nincsenek ticketek hozzárendelve.
-							</p>
+							<div class="mb-3">
+								<small class="text-muted">
+									Nincsenek ticketek hozzárendelve.
+								</small>
+							</div>
 						@endif
 						<p class="card-text mb-3">
 							{{$project->description}}
 						</p>
 						@if($project->contacts->count() > 0)
 							<small class="text-muted">Kapcsolattartók:</small>
-							<ul class="list-group mb-4">
+							<ul class="list-group mb-5">
 								@foreach($project->contacts as $contact)
 									<li class="list-group-item">{{$contact->name}}</li>
 								@endforeach
 							</ul>
 						@endif
 
-						<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
+						<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
 					</div>
 				</div>
 			</div>

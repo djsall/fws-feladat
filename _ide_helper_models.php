@@ -18,12 +18,14 @@ namespace App\Models{
  * @property string $name Projekt neve
  * @property string $description Projekt leírása
  * @property string $status Projekt státusza
- * @property int $owner_id Tulajdonos user ID-je.
+ * @property int $user_id Tulajdonos user ID-je.
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $contacts
  * @property-read int|null $contacts_count
- * @property-read \App\Models\User $owner
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
+ * @property-read int|null $tickets_count
+ * @property-read \App\Models\User $user
  * @method static \Database\Factories\ProjectFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
@@ -32,9 +34,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Project whereOwnerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserId($value)
  */
 	class Project extends \Eloquent {}
 }
@@ -48,9 +50,11 @@ namespace App\Models{
  * @property string $description
  * @property string $status
  * @property int $created_by
- * @property int $project
+ * @property int $project_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Project $project
+ * @method static \Database\Factories\TicketFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket query()
@@ -59,7 +63,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereProject($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
  */

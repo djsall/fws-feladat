@@ -25,24 +25,18 @@
 			<div class="col-lg-4 d-flex align-items-stretch mb-3">
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
-						<h5 class="card-title fw-bold mb-1">{{$ticket->name}}
-							<span class="badge rounded-pill
-							@if($ticket->isClosed())        bg-success @endif
-							@if($ticket->isInProgress())    bg-primary @endif
-							@if($ticket->isOpen())          bg-warning @endif
-								">
-								{{$ticket->getTranslatedStatus()}}
-							</span>
-						</h5>
-						<h5 class="text-muted mb-3 mt-0">
-							<a href="{{ route("projects.edit", $ticket->project->id) }}" class="text-muted">
-								{{$ticket->project->name}}
+
+						<h4 class="card-title fw-bold mb-1">
+							<a class="text-black" href="{{ route("tickets.show", $ticket->id) }}">
+								{{$ticket->name}}
 							</a>
-						</h5>
-						<p class="card-text mb-4">
+						</h4>
+						<x-ui.status :ticket="$ticket"/>
+						<x-ui.project-link :ticket="$ticket"/>
+						<p class="card-text mb-5">
 							{{$ticket->description}}
 						</p>
-						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-sm btn-dark align-self-start mt-auto">Szerkesztés</a>
+						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
 					</div>
 				</div>
 			</div>

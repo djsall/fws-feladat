@@ -79,7 +79,7 @@ class ProjectController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function show($project) {
-		$projectInstance = Project::find($project);
+		$projectInstance = Project::with("tickets")->find($project);
 		if (!$projectInstance)
 			return redirect(route("index"))->with([
 				"error" => "Nem található projekt."
