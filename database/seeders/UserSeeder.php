@@ -24,6 +24,7 @@ class UserSeeder extends Seeder {
 			$user->name = 'Levente Proksa';
 			$user->password = '$2y$10$QIJHp09DghAZxa6B/ht76.xnDXXZMwuzBmM4L6wpCCvGOKWPLbWTi';
 			$user->email = 'proksalevente@gmail.com';
+			$user->role = 'admin';
 
 			$user->save();
 		}

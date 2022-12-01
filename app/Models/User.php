@@ -48,6 +48,9 @@ class User extends Authenticatable
 			return $this->role == "employee";
 		}
 		public function isManager(){
-			return $this->role == "manager";
+			return $this->role == "manager" || $this->role == "admin";
+		}
+		public function isAdmin(){
+			return $this->role == "admin";
 		}
 }

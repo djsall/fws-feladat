@@ -37,12 +37,16 @@
 				<li class="nav-item">
 					<a href="{{ route('tickets.index') }}" class="nav-link @if(Route::is("tickets.*")) active @endif">Ticketek</a>
 				</li>
+				@if(Auth::user()->isAdmin())
+					<li class="nav-item">
+						<a href="{{ route("users.index") }}" class="nav-link @if(Route::is("users.index")) active @endif">Felhasználók</a>
+					</li>
+				@endif
 			</ul>
 			<ul class="navbar-nav ms-auto">
 				@if(Auth::user())
 					<li class="nav-item">
 						<span class="nav-link">
-
 							{{ Auth::user()->name }}
 						</span>
 					</li>
