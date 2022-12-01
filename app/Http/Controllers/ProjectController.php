@@ -16,9 +16,15 @@ class ProjectController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		//
+		if (Auth::user()->isEmployee()) {
+			$projects = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
+				$q->where("users.id", Auth::id());
+			})->get();
+		}
+		else
+			$projects = Project::with("contacts", "tickets")->get();
 		return view("projects.index")->with([
-			"projects" => Project::with("contacts", "tickets")->paginate(12)
+			"projects" => $projects
 		]);
 	}
 
@@ -29,10 +35,15 @@ class ProjectController extends Controller {
 	 */
 	public function create() {
 		//
-		return view("projects.create")->with([
-			"statuses"          => Project::getPossibleStatuses(),
-			"possible_contacts" => User::all()->except(Auth::id())
-		]);
+		if (Auth::user()->isManager()) {
+			return view("projects.create")->with([
+				"statuses"          => Project::getPossibleStatuses(),
+				"possible_contacts" => User::all()->except(Auth::id())
+			]);
+		}
+		else {
+			return redirect(route("projects.index"));
+		}
 	}
 
 	/**
@@ -96,6 +107,9 @@ class ProjectController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function edit($project) {
+		if (Auth::user()->isEmployee()) {
+			return redirect(route("projects.index"));
+		}
 		$projectInstance = Project::find($project);
 
 		$contactIDs = [];

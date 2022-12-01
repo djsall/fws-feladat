@@ -44,4 +44,10 @@ class User extends Authenticatable
 		public function ownedProjects(){
 			return $this->hasMany(Project::class);
 		}
+		public function isEmployee(){
+			return $this->role == "employee";
+		}
+		public function isManager(){
+			return $this->role == "manager";
+		}
 }

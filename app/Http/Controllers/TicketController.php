@@ -15,9 +15,17 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		//
+		if(Auth::user()->isEmployee()){
+
+			$tickets = Ticket::with("project")->whereHas("project", function ($q) {
+				$q->whereHas("contacts", function ($q){
+					$q->where("users.id", Auth::id());
+				});
+			})->get();
+		}else
+			$tickets = Ticket::with('project')->get();
 		return view("tickets.index")->with([
-			"tickets" => Ticket::with('project')->paginate(12)
+				"tickets" => $tickets
 		]);
 	}
 
@@ -27,8 +35,11 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function create() {
+		$projects = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
+			$q->where("users.id", Auth::id());
+		})->get();
 		return view("tickets.create")->with([
-			"projects" => Project::all()
+			"projects" => $projects
 		]);
 	}
 
@@ -42,7 +53,7 @@ class TicketController extends Controller {
 		$data = $this->validate($request, [
 			"name"        => "string|required",
 			"description" => "string|required",
-			"project"     => "int|required"
+			"project_id"     => "int|required"
 		]);
 		$data["created_by"] = Auth::user()->id;
 
@@ -55,7 +66,7 @@ class TicketController extends Controller {
 	 * Display the specified resource.
 	 *
 	 * @param \App\Models\Ticket $ticket
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function show(Ticket $ticket) {
 		//

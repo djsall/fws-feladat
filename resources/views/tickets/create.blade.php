@@ -21,8 +21,8 @@
 						<textarea rows="6" type="text" name="description" id="description" class="form-control" required></textarea>
 					</div>
 					<div class="form-group mb-2">
-						<label for="project">Projekt:</label>
-						<select name="project" id="project" class="form-select" required>
+						<label for="project_id">Projekt:</label>
+						<select name="project_id" id="project_id" class="form-select" required>
 							@foreach($projects as $key => $project)
 								<option value="{{$project->id}}"> {{$project->name}}</option>
 							@endforeach

@@ -4,14 +4,18 @@
 		<div class="col-12">
 			@if($projects->count() == 0)
 				<h1 class="display-5">Még nem található projekt.</h1>
-				<a href="{{route("projects.create")}}" class="btn btn-success">Hozz létre egyet</a>
+				@if(Auth::user()->isManager())
+					<a href="{{route("projects.create")}}" class="btn btn-success">Hozz létre egyet</a>
+				@endif
 			@else
 				<div class="row">
 					<div class="col">
 						<h1 class="fw-bold mb-4 mt-0">Projektek</h1>
 					</div>
 					<div class="col-3 col-md-2">
-						<a href="{{route("projects.create")}}" class="btn btn-primary w-100">Létrehozás</a>
+						@if(Auth::user()->isManager())
+							<a href="{{route("projects.create")}}" class="btn btn-primary w-100">Létrehozás</a>
+						@endif
 					</div>
 				</div>
 			@endif
@@ -31,15 +35,17 @@
 						<x-ui.status :project="$project"/>
 						<x-ui.tickets :project="$project"/>
 						<x-ui.contacts :project="$project"/>
-						<p class="card-text mb-5">
+						<p class="card-text mb-2">
 							{{$project->description}}
 						</p>
-						<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
+						@if(Auth::user()->isManager())
+							<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
+						@endif
 					</div>
 				</div>
 			</div>
 		@endforeach
-		{{ $projects->links('pagination::bootstrap-5') }}
+		{{--		{{ $projects->links('pagination::bootstrap-5') }}--}}
 	</div>
 
 @endsection

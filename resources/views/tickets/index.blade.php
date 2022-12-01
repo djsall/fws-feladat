@@ -40,7 +40,7 @@
 				</div>
 			</div>
 		@endforeach
-		{{ $tickets->links('pagination::bootstrap-5') }}
+{{--		{{ $tickets->links('pagination::bootstrap-5') }}--}}
 	</div>
 
 @endsection
