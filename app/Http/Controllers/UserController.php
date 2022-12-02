@@ -15,13 +15,13 @@ class UserController extends Controller {
 	public function index() {
 		//
 		if (Auth::user()->isAdmin())
-			return view("users.index")->with([
-				"users" => User::whereIn("role", [
-					"employee",
-					"manager"
+			return view('users.index')->with([
+				'users' => User::whereIn('role', [
+					'employee',
+					'manager'
 				])->get()
 			]);
-		return redirect(route("projects.index"));
+		return redirect(route('projects.index'));
 	}
 
 	/**

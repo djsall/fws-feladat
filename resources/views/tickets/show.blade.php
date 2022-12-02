@@ -23,10 +23,10 @@
 		</div>
 	</div>
 	<script type="module">
-		let deleteBtn = $("#edit-btn");
+		let editBtn = $("#edit-btn");
 		const url = `{!! route("tickets.edit", $ticket->id) !!}`;
 
-		deleteBtn.click(function () {
+		editBtn.click(function () {
 			window.location.replace(url);
 		});
 	</script>

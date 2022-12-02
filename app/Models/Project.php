@@ -9,9 +9,9 @@ class Project extends Model {
 	use HasFactory;
 
 	public static array $statuses = [
-		"awaiting_development" => "Fejlesztésre vár",
-		"in_progress"          => "Folyamatban",
-		"completed"            => "Kész"
+		'awaiting_development' => 'Fejlesztésre vár',
+		'in_progress'          => 'Folyamatban',
+		'completed'            => 'Kész'
 	];
 
 	public function user() {
@@ -31,15 +31,15 @@ class Project extends Model {
 	}
 
 	public function isPending(){
-		return $this->status == "awaiting_development";
+		return $this->status == 'awaiting_development';
 	}
 
 	public function isInProgress(){
-		return $this->status == "in_progress";
+		return $this->status == 'in_progress';
 	}
 
 	public function isCompleted(){
-		return $this->status == "completed";
+		return $this->status == 'completed';
 	}
 
 	public static function getPossibleStatuses() {

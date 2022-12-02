@@ -45,12 +45,12 @@ class User extends Authenticatable
 			return $this->hasMany(Project::class);
 		}
 		public function isEmployee(){
-			return $this->role == "employee";
+			return $this->role == 'employee';
 		}
 		public function isManager(){
-			return $this->role == "manager" || $this->role == "admin";
+			return $this->role == 'manager' || $this->role == 'admin';
 		}
 		public function isAdmin(){
-			return $this->role == "admin";
+			return $this->role == 'admin';
 		}
 }
