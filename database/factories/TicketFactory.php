@@ -21,7 +21,6 @@ class TicketFactory extends Factory {
 		return [
 
 
-
 			//
 			"name"        => fake()->company(),
 			"description" => Str::limit("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda corporis magnam molestiae non officiis sint sit, ut? Ab aliquam aperiam est, et fugit harum libero, minima neque, officiis quidem velit!
@@ -29,9 +28,9 @@ class TicketFactory extends Factory {
 												Accusamus animi asperiores beatae dicta dignissimos dolorem dolores eius fuga iusto labore molestias nemo qui repudiandae sapiente, vero! Atque, fugiat harum necessitatibus numquam officia quia quidem quisquam repellat voluptatem
 													voluptatibus.", rand(25, 500)),
 			"project_id"  => Project::find(rand(1, Project::count())),
-			"owner_id"    => User::find(rand(2, User::count())),
-			"status"      => array_keys(Ticket::$statuses)[rand(0,2)],
-			"created_by"  => User::find(rand(2, User::count())),
+			"owner_id"    => User::find(rand(1, User::count())),
+			"status"      => array_keys(Ticket::$statuses)[rand(0, 2)],
+			"created_by"  => User::find(rand(1, User::count())),
 		];
 	}
 }

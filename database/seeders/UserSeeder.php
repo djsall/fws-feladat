@@ -17,18 +17,6 @@ class UserSeeder extends Seeder {
 	 */
 	public function run() {
 		//
-
-		if (User::count() == 0) {
-
-			$user = new User();
-			$user->name = 'Levente Proksa';
-			$user->password = '$2y$10$QIJHp09DghAZxa6B/ht76.xnDXXZMwuzBmM4L6wpCCvGOKWPLbWTi';
-			$user->email = 'proksalevente@gmail.com';
-			$user->role = 'admin';
-
-			$user->save();
-		}
-
 		User::factory(10)->create();
 	}
 }

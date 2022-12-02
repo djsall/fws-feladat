@@ -24,7 +24,7 @@ class ProjectFactory extends Factory {
 												Accusamus animi asperiores beatae dicta dignissimos dolorem dolores eius fuga iusto labore molestias nemo qui repudiandae sapiente, vero! Atque, fugiat harum necessitatibus numquam officia quia quidem quisquam repellat voluptatem
 													voluptatibus.", rand(25, 500)),
 			"status"      => array_keys(Project::$statuses)[rand(0,2)],
-			"user_id"     => User::find(rand(2, User::all()->count())),
+			"user_id"     => User::find(rand(1, User::all()->count())),
 		];
 	}
 }
