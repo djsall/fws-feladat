@@ -183,11 +183,11 @@ class ProjectController extends Controller {
 	 */
 	public function destroy($project) {
 		$projectInstance = Project::find($project);
-		if ($projectInstance->contacts->count() > 0)
-			$projectInstance?->contacts()->detach();
-		if (!$projectInstance->tickets()->count() > 0)
-			$projectInstance?->delete();
-
+		if (!$projectInstance->tickets()->count() > 0) {
+			if ($projectInstance->contacts->count() > 0)
+				$projectInstance->contacts()->detach();
+			$projectInstance->delete();
+		}
 
 		return route('index');
 	}

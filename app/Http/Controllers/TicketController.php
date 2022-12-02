@@ -116,7 +116,7 @@ class TicketController extends Controller {
 		$data = $this->validate($request, [
 			'name'        => 'string|required',
 			'description' => 'string|required',
-			'status'      => 'required|in:'.$statuses,
+			'status'      => 'required|in:' . $statuses,
 			'owner_id'    => 'int|required',
 		]);
 
@@ -137,10 +137,9 @@ class TicketController extends Controller {
 	 * @return string
 	 */
 	public function destroy($ticket) {
-		if(Auth::user()->isManager()){
-
-		$ticket = Ticket::find($ticket);
-		$ticket->delete();
+		if (Auth::user()->isManager()) {
+			$ticket = Ticket::find($ticket);
+			$ticket->delete();
 		}
 
 		return route('tickets.index');
