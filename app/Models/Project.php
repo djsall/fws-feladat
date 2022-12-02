@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model {
 	use HasFactory;
+	use SoftDeletes;
 
 	public static array $statuses = [
 		'awaiting_development' => 'Fejlesztésre vár',
@@ -18,7 +20,7 @@ class Project extends Model {
 		return $this->belongsTo(User::class);
 	}
 
-	public function tickets(){
+	public function tickets() {
 		return $this->hasMany(Ticket::class);
 	}
 
@@ -30,15 +32,15 @@ class Project extends Model {
 		return self::$statuses[$this->status];
 	}
 
-	public function isPending(){
+	public function isPending() {
 		return $this->status == 'awaiting_development';
 	}
 
-	public function isInProgress(){
+	public function isInProgress() {
 		return $this->status == 'in_progress';
 	}
 
-	public function isCompleted(){
+	public function isCompleted() {
 		return $this->status == 'completed';
 	}
 
