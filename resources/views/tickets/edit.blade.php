@@ -40,13 +40,16 @@
 					<div class="form-group mb-2 mt-5">
 						<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
 					</div>
-					<div class="form-group mb-2 mt-3">
-						<button type="button" id="delete-btn" class="btn btn-outline-danger btn-block w-100">Törlés</button>
-					</div>
+					@if(Auth::user()->isManager())
+						<div class="form-group mb-2 mt-3">
+							<button type="button" id="delete-btn" class="btn btn-outline-danger btn-block w-100">Törlés</button>
+						</div>
+					@endif
 				</form>
 			</div>
 		</div>
 		<script type="module">
+			@if(Auth::user()->isManager())
 			let deleteBtn = $("#delete-btn");
 			const url = `{!! route("tickets.destroy", $ticket->id) !!}`;
 
@@ -57,5 +60,6 @@
 						window.location.replace(res.data);
 					})
 			});
+			@endif
 		</script>
 @endsection

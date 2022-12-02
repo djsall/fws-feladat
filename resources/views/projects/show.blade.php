@@ -9,6 +9,7 @@
 							{{ $project->name }}
 						</h4>
 						<x-ui.status :project="$project"/>
+						<x-ui.project-owner :project="$project"/>
 						<p class="mt-3">{{ $project->description }}</p>
 						@if(Auth::user()->isManager())
 							<div class="form-group mb-2 mt-5">

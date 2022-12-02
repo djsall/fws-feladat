@@ -18,15 +18,15 @@ class ProjectController extends Controller {
 	 */
 	public function index() {
 		if (Auth::user()->isEmployee()) {
-			$projects1 = Project::with('contacts', 'tickets')->whereHas('contacts', function ($q) {
+			$projects1 = Project::with('contacts', 'tickets', 'user')->whereHas('contacts', function ($q) {
 				$q->where('users.id', Auth::id());
 			})->get();
-			$projects2 = Project::with('contacts', 'tickets')->where('user_id', '=', Auth::id())->get();
+			$projects2 = Project::with('contacts', 'tickets', 'user')->where('user_id', '=', Auth::id())->get();
 
 			$projects = $projects1->merge($projects2)->paginate(6);
 		}
 		else
-			$projects = Project::with('contacts', 'tickets')->paginate(6);
+			$projects = Project::with('contacts', 'tickets', 'user')->paginate(6);
 		return view('projects.index')->with([
 			'projects' => $projects
 		]);

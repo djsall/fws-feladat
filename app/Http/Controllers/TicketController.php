@@ -39,9 +39,12 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function create() {
-		$projects = Project::with('contacts', 'tickets')->whereHas('contacts', function ($q) {
+		$projects1 = Project::with('contacts', 'tickets', 'user')->whereHas('contacts', function ($q) {
 			$q->where('users.id', Auth::id());
 		})->get();
+		$projects2 = Project::with('contacts', 'tickets', 'user')->where('user_id', '=', Auth::id())->get();
+
+		$projects = $projects1->merge($projects2);
 		return view('tickets.create')->with([
 			'projects' => $projects,
 			'users'    => User::all()
@@ -113,7 +116,7 @@ class TicketController extends Controller {
 		$data = $this->validate($request, [
 			'name'        => 'string|required',
 			'description' => 'string|required',
-			'status'      => 'in:$statuses|required',
+			'status'      => 'required|in:'.$statuses,
 			'owner_id'    => 'int|required',
 		]);
 
@@ -134,8 +137,11 @@ class TicketController extends Controller {
 	 * @return string
 	 */
 	public function destroy($ticket) {
+		if(Auth::user()->isManager()){
+
 		$ticket = Ticket::find($ticket);
 		$ticket->delete();
+		}
 
 		return route('tickets.index');
 	}

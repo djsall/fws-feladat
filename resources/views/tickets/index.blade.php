@@ -26,17 +26,15 @@
 				<div class="card w-100">
 					<div class="card-body d-flex flex-column">
 						<h4 class="card-title fw-bold mb-1">
-							<a class="text-black" href="{{ route("tickets.show", $ticket->id) }}">
-								{{$ticket->name}}
-							</a>
+							{{$ticket->name}}
 						</h4>
 						<x-ui.status :ticket="$ticket"/>
-						<x-ui.ticket-owner :ticket="$ticket" />
+						<x-ui.ticket-owner :ticket="$ticket"/>
 						<x-ui.project-link :ticket="$ticket"/>
 						<p class="card-text mb-5">
 							{{$ticket->description}}
 						</p>
-						<a href="{{route("tickets.edit", ["ticket"=>$ticket->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
+						<a href="{{route("tickets.show", ["ticket"=>$ticket->id])}}" class="btn btn-block btn-dark mt-auto">Részletek</a>
 					</div>
 				</div>
 			</div>
