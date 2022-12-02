@@ -18,6 +18,8 @@ return new class extends Migration
 						$table->string("name");
 						$table->text("description");
 						$table->enum("status", ["open", "in_progress", "closed"]);
+						$table->unsignedBigInteger("owner_id");
+						$table->foreign("owner_id")->references("id")->on("users");
 						$table->unsignedBigInteger("created_by");
 						$table->foreign("created_by")->references("id")->on("users");
 						$table->unsignedBigInteger("project_id");

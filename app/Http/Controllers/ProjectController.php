@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -17,12 +18,15 @@ class ProjectController extends Controller {
 	 */
 	public function index() {
 		if (Auth::user()->isEmployee()) {
-			$projects = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
+			$projects1 = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
 				$q->where("users.id", Auth::id());
 			})->get();
+			$projects2 = Project::with("contacts", "tickets")->where("user_id", "=", Auth::id())->get();
+
+			$projects = $projects1->merge($projects2)->paginate(6);
 		}
 		else
-			$projects = Project::with("contacts", "tickets")->get();
+			$projects = Project::with("contacts", "tickets")->paginate(6);
 		return view("projects.index")->with([
 			"projects" => $projects
 		]);
@@ -125,7 +129,7 @@ class ProjectController extends Controller {
 		return view("projects.edit")->with([
 			"project"           => $projectInstance,
 			"statuses"          => Project::getPossibleStatuses(),
-			"possible_contacts" => User::all()->except(Auth::id()),
+			"possible_contacts" => User::all(),
 			"contact_ids"       => $contactIDs,
 		]);
 

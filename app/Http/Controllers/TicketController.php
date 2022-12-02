@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -15,17 +16,20 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function index() {
-		if(Auth::user()->isEmployee()){
+		if (Auth::user()->isEmployee()) {
 
-			$tickets = Ticket::with("project")->whereHas("project", function ($q) {
-				$q->whereHas("contacts", function ($q){
-					$q->where("users.id", Auth::id());
+			$tickets1 = Ticket::with('project', 'owner')->whereHas('project', function ($q) {
+				$q->whereHas('contacts', function ($q) {
+					$q->where('users.id', Auth::id());
 				});
 			})->get();
-		}else
-			$tickets = Ticket::with('project')->get();
-		return view("tickets.index")->with([
-				"tickets" => $tickets
+			$tickets2 = Ticket::with('project', 'owner')->where('owner_id', '=', Auth::id())->get();
+			$tickets = $tickets1->merge($tickets2)->paginate(6);
+		}
+		else
+			$tickets = Ticket::with('project', 'owner')->paginate(6);
+		return view('tickets.index')->with([
+			'tickets' => $tickets,
 		]);
 	}
 
@@ -35,11 +39,12 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function create() {
-		$projects = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
-			$q->where("users.id", Auth::id());
+		$projects = Project::with('contacts', 'tickets')->whereHas('contacts', function ($q) {
+			$q->where('users.id', Auth::id());
 		})->get();
-		return view("tickets.create")->with([
-			"projects" => $projects
+		return view('tickets.create')->with([
+			'projects' => $projects,
+			'users'    => User::all()
 		]);
 	}
 
@@ -51,15 +56,16 @@ class TicketController extends Controller {
 	 */
 	public function store(Request $request) {
 		$data = $this->validate($request, [
-			"name"        => "string|required",
-			"description" => "string|required",
-			"project_id"     => "int|required"
+			'name'        => 'string|required',
+			'description' => 'string|required',
+			'project_id'  => 'int|required',
+			'owner_id'    => 'int|required'
 		]);
-		$data["created_by"] = Auth::user()->id;
+		$data['created_by'] = Auth::user()->id;
 
 		Ticket::create($data);
 
-		return redirect(route("tickets.index"));
+		return redirect(route('tickets.index'));
 	}
 
 	/**
@@ -70,8 +76,8 @@ class TicketController extends Controller {
 	 */
 	public function show(Ticket $ticket) {
 		//
-		return view("tickets.show")->with([
-			"ticket" => $ticket,
+		return view('tickets.show')->with([
+			'ticket' => $ticket,
 		]);
 	}
 
@@ -82,9 +88,10 @@ class TicketController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function edit($ticket) {
-		return view("tickets.edit")->with([
-			"statuses" => Ticket::getPossibleStatuses(),
-			"ticket"   => Ticket::find($ticket)
+		return view('tickets.edit')->with([
+			'statuses' => Ticket::getPossibleStatuses(),
+			'ticket'   => Ticket::find($ticket),
+			'users'    => User::all()
 		]);
 	}
 
@@ -97,25 +104,27 @@ class TicketController extends Controller {
 	 */
 	public function update(Request $request, $ticket) {
 		//
-		$statuses = "";
+		$statuses = '';
 
-		foreach (Ticket::$statuses as $key => $status){
-			$statuses .= $key . ",";
+		foreach (Ticket::$statuses as $key => $status) {
+			$statuses .= $key . ',';
 		}
 
 		$data = $this->validate($request, [
-			"name"        => "string|required",
-			"description" => "string|required",
-			"status" => "in:$statuses"
+			'name'        => 'string|required',
+			'description' => 'string|required',
+			'status'      => 'in:$statuses|required',
+			'owner_id'    => 'int|required',
 		]);
 
 		$ticketInstance = Ticket::find($ticket);
-		$ticketInstance->name = $data["name"];
-		$ticketInstance->description = Str::limit($data["description"], 65000);
-		$ticketInstance->status = $data["status"];
+		$ticketInstance->name = $data['name'];
+		$ticketInstance->description = Str::limit($data['description'], 65000);
+		$ticketInstance->status = $data['status'];
+		$ticketInstance->owner_id = $data['owner_id'];
 		$ticketInstance->save();
 
-		return redirect(route("tickets.index"));
+		return redirect(route('tickets.index'));
 	}
 
 	/**
@@ -128,6 +137,6 @@ class TicketController extends Controller {
 		$ticket = Ticket::find($ticket);
 		$ticket->delete();
 
-		return route("tickets.index");
+		return route('tickets.index');
 	}
 }

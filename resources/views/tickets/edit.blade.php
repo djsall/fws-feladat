@@ -22,10 +22,18 @@
 						<textarea rows="6" type="text" name="description" id="description" class="form-control" required>{{ $ticket->description }}</textarea>
 					</div>
 					<div class="form-group mb-2">
-						<label for="status">Ticket státusza:</label>
+						<label for="status" class="form-label">Ticket státusza:</label>
 						<select name="status" id="status" class="form-select" required>
 							@foreach($statuses as $key => $status)
 								<option @if($ticket->status == $key) selected @endif value="{{$key}}"> {{$status}}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group mb-2">
+						<label for="owner_id" class="form-label">Felelős:</label>
+						<select name="owner_id" id="owner_id" class="form-select" required>
+							@foreach($users as $user)
+								<option value="{{$user->id}}" @if($user->id == $ticket->owner_id) selected @endif>{{$user->name}}</option>
 							@endforeach
 						</select>
 					</div>

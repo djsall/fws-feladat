@@ -31,6 +31,7 @@
 							</a>
 						</h4>
 						<x-ui.status :ticket="$ticket"/>
+						<x-ui.ticket-owner :ticket="$ticket" />
 						<x-ui.project-link :ticket="$ticket"/>
 						<p class="card-text mb-5">
 							{{$ticket->description}}
@@ -40,7 +41,7 @@
 				</div>
 			</div>
 		@endforeach
-{{--		{{ $tickets->links('pagination::bootstrap-5') }}--}}
+		{{ $tickets->links('pagination::bootstrap-5') }}
 	</div>
 
 @endsection

@@ -10,9 +10,11 @@
 						</h4>
 						<x-ui.status :project="$project"/>
 						<p class="mt-3">{{ $project->description }}</p>
-						<div class="form-group mb-2 mt-5">
-							<button type="button" id="edit-btn" class="btn btn-dark btn-block w-100">Szerkesztés</button>
-						</div>
+						@if(Auth::user()->isManager())
+							<div class="form-group mb-2 mt-5">
+								<button type="button" id="edit-btn" class="btn btn-dark btn-block w-100">Szerkesztés</button>
+							</div>
+						@endif
 					</div>
 				</div>
 				<div class="col-4 d-flex align-items-stretch">

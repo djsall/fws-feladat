@@ -17,7 +17,6 @@ class Ticket extends Model {
 	public function project(){
 		return $this->belongsTo(Project::class);
 	}
-
 	public static function getPossibleStatuses() {
 		return self::$statuses;
 	}
@@ -32,5 +31,8 @@ class Ticket extends Model {
 	}
 	public function getTranslatedStatus(){
 		return self::$statuses[$this->status];
+	}
+	public function owner(){
+		return $this->hasOne(User::class, "id", "owner_id");
 	}
 }

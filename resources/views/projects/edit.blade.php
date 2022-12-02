@@ -20,7 +20,7 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="description" class="form-label">Projekt leírása:</label>
-						<textarea rows="6" type="text" name="description" id="description" class="form-control" required >{{ $project->description }}</textarea>
+						<textarea rows="6" type="text" name="description" id="description" class="form-control" required>{{ $project->description }}</textarea>
 					</div>
 					<div class="form-group mb-2">
 						<label for="status">Projekt státusza:</label>
@@ -42,14 +42,17 @@
 					<div class="form-group mt-4">
 						<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
 					</div>
-					<div class="form-group mb-2 mt-3">
-						<button type="button" id="delete-btn" class="btn btn-outline-danger btn-block w-100">Törlés</button>
-					</div>
+					@if($project->tickets()->count() == 0)
+						<div class="form-group mb-2 mt-3">
+							<button type="button" id="delete-btn" class="btn btn-outline-danger btn-block w-100">Törlés</button>
+						</div>
+					@endif
 				</form>
 			</div>
 
 		</div>
 		<script type="module">
+			@if($project->tickets()->count() == 0)
 			let deleteBtn = $("#delete-btn");
 			const url = `{!! route("projects.destroy", $project->id) !!}`;
 			const projectId = {!! $project->id !!};
@@ -61,5 +64,6 @@
 						window.location.replace(res.data);
 					})
 			});
+			@endif
 		</script>
 @endsection

@@ -38,14 +38,12 @@
 						<p class="card-text mb-2">
 							{{$project->description}}
 						</p>
-						@if(Auth::user()->isManager())
-							<a href="{{route("projects.edit", ["project"=>$project->id])}}" class="btn btn-block btn-dark mt-auto">Szerkesztés</a>
-						@endif
+						<a href="{{route("projects.show", ["project"=>$project->id])}}" class="btn btn-block btn-dark mt-auto">Részletek</a>
 					</div>
 				</div>
 			</div>
 		@endforeach
-		{{--		{{ $projects->links('pagination::bootstrap-5') }}--}}
+		{{ $projects->links('pagination::bootstrap-5') }}
 	</div>
 
 @endsection

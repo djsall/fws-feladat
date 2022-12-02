@@ -28,6 +28,14 @@
 							@endforeach
 						</select>
 					</div>
+					<div class="form-group mb-2">
+						<label for="owner_id" class="form-label">Felelős:</label>
+						<select name="owner_id" id="owner_id" class="form-select" required>
+							@foreach($users as $user)
+								<option value="{{$user->id}}">{{$user->name}}</option>
+							@endforeach
+						</select>
+					</div>
 					<div class="form-group mb-2 mt-5">
 						<input type="submit" value="Mentés" class="btn btn-success btn-block w-100">
 					</div>
