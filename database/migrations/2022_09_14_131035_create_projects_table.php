@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-						$table->string("name")->comment("Projekt neve");
-						$table->text("description")->comment("Projekt leírása");
-						$table->enum("status", ["awaiting_development", "in_progress", "completed"])->comment("Projekt státusza");
-						$table->unsignedBigInteger("user_id")->comment("Tulajdonos user ID-je.");
-						$table->foreign("user_id")->references("id")->on("users");
+						$table->string('name')->comment('Projekt neve');
+						$table->text('description')->comment('Projekt leírása');
+						$table->enum('status', ['awaiting_development', 'in_progress', 'completed'])->comment('Projekt státusza');
+						$table->unsignedBigInteger('user_id')->comment('Tulajdonos user ID-je.');
+						$table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
