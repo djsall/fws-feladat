@@ -18,17 +18,17 @@ class ProjectController extends Controller {
 	 */
 	public function index() {
 		if (Auth::user()->isEmployee()) {
-			$projects1 = Project::with("contacts", "tickets")->whereHas("contacts", function ($q) {
-				$q->where("users.id", Auth::id());
+			$projects1 = Project::with('contacts', 'tickets')->whereHas('contacts', function ($q) {
+				$q->where('users.id', Auth::id());
 			})->get();
-			$projects2 = Project::with("contacts", "tickets")->where("user_id", "=", Auth::id())->get();
+			$projects2 = Project::with('contacts', 'tickets')->where('user_id', '=', Auth::id())->get();
 
 			$projects = $projects1->merge($projects2)->paginate(6);
 		}
 		else
-			$projects = Project::with("contacts", "tickets")->paginate(6);
-		return view("projects.index")->with([
-			"projects" => $projects
+			$projects = Project::with('contacts', 'tickets')->paginate(6);
+		return view('projects.index')->with([
+			'projects' => $projects
 		]);
 	}
 
@@ -40,13 +40,13 @@ class ProjectController extends Controller {
 	public function create() {
 		//
 		if (Auth::user()->isManager()) {
-			return view("projects.create")->with([
-				"statuses"          => Project::getPossibleStatuses(),
-				"possible_contacts" => User::all()->except(Auth::id())
+			return view('projects.create')->with([
+				'statuses'          => Project::getPossibleStatuses(),
+				'possible_contacts' => User::all()->except(Auth::id())
 			]);
 		}
 		else {
-			return redirect(route("projects.index"));
+			return redirect(route('projects.index'));
 		}
 	}
 
@@ -58,32 +58,32 @@ class ProjectController extends Controller {
 	 */
 	public function store(Request $request) {
 
-		$statuses = "";
+		$statuses = '';
 		foreach (Project::$statuses as $status => $val) {
-			$statuses .= $status . ",";
+			$statuses .= $status . ',';
 		}
 
 		$data = $request->validate([
-			"name"        => "required",
-			"description" => "required",
-			"status"      => "in:$statuses",
-			"contact"     => "required|array",
-			"contact.*"   => "int"
+			'name'        => 'required',
+			'description' => 'required',
+			'status'      => 'in:$statuses',
+			'contact'     => 'required|array',
+			'contact.*'   => 'int'
 		]);
 
 		$projectInstance = new Project();
-		$projectInstance->name = $data["name"];
-		$projectInstance->description = Str::limit($data["description"], 65000);
-		$projectInstance->status = $data["status"];
+		$projectInstance->name = $data['name'];
+		$projectInstance->description = Str::limit($data['description'], 65000);
+		$projectInstance->status = $data['status'];
 		$projectInstance->user_id = Auth::user()->id;
 
 		$projectInstance->save();
 
-		foreach ($data["contact"] as $contact) {
+		foreach ($data['contact'] as $contact) {
 			$projectInstance->contacts()->attach($contact);
 		}
 
-		return redirect(route("index"));
+		return redirect(route('index'));
 
 	}
 
@@ -94,13 +94,13 @@ class ProjectController extends Controller {
 	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
 	 */
 	public function show($project) {
-		$projectInstance = Project::with("tickets")->find($project);
+		$projectInstance = Project::with('tickets')->find($project);
 		if (!$projectInstance)
-			return redirect(route("index"))->with([
-				"error" => "Nem található projekt."
+			return redirect(route('index'))->with([
+				'error' => 'Nem található projekt.'
 			]);
-		return view("projects.show")->with([
-			"project" => $projectInstance
+		return view('projects.show')->with([
+			'project' => $projectInstance
 		]);
 	}
 
@@ -112,7 +112,7 @@ class ProjectController extends Controller {
 	 */
 	public function edit($project) {
 		if (Auth::user()->isEmployee()) {
-			return redirect(route("projects.index"));
+			return redirect(route('projects.index'));
 		}
 		$projectInstance = Project::find($project);
 
@@ -122,15 +122,15 @@ class ProjectController extends Controller {
 		}
 
 		if (!$projectInstance)
-			return redirect(route("index"))->with([
-				"error" => "Nem található projekt."
+			return redirect(route('index'))->with([
+				'error' => 'Nem található projekt.'
 			]);
 
-		return view("projects.edit")->with([
-			"project"           => $projectInstance,
-			"statuses"          => Project::getPossibleStatuses(),
-			"possible_contacts" => User::all(),
-			"contact_ids"       => $contactIDs,
+		return view('projects.edit')->with([
+			'project'           => $projectInstance,
+			'statuses'          => Project::getPossibleStatuses(),
+			'possible_contacts' => User::all(),
+			'contact_ids'       => $contactIDs,
 		]);
 
 	}
@@ -144,34 +144,34 @@ class ProjectController extends Controller {
 	 */
 	public function update(Request $request, $project) {
 		//
-		$statuses = "";
+		$statuses = '';
 		foreach (Project::$statuses as $status => $val) {
-			$statuses .= $status . ",";
+			$statuses .= $status . ',';
 		}
 
 		$data = $request->validate([
-			"name"        => "required",
-			"description" => "required",
-			"status"      => "in:$statuses",
-			"contact"     => "required|array",
-			"contact.*"   => "int"
+			'name'        => 'required',
+			'description' => 'required',
+			'status'      => 'in:$statuses',
+			'contact'     => 'required|array',
+			'contact.*'   => 'int'
 		]);
 
 		$projectInstance = Project::findOrFail($project);
-		$projectInstance->name = $data["name"];
-		$projectInstance->description = $data["description"];
-		$projectInstance->status = $data["status"];
+		$projectInstance->name = $data['name'];
+		$projectInstance->description = $data['description'];
+		$projectInstance->status = $data['status'];
 		$projectInstance->user_id = Auth::user()->id;
 
 		$projectInstance->save();
 
 		$projectInstance->contacts()->detach();
 
-		foreach ($data["contact"] as $contact) {
+		foreach ($data['contact'] as $contact) {
 			$projectInstance->contacts()->attach($contact);
 		}
 
-		return redirect(route("index"));
+		return redirect(route('index'));
 	}
 
 	/**
@@ -187,6 +187,6 @@ class ProjectController extends Controller {
 			$projectInstance?->contacts()->detach();
 		$projectInstance?->delete();
 
-		return route("index");
+		return route('index');
 	}
 }

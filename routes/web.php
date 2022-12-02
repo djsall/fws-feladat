@@ -45,5 +45,5 @@ Route::middleware(['auth'])->group(function () {
 		'destroy'
 	])->name('tickets.destroy');
 
-	Route::resource('users', UserController::class, ['only' => ['index', 'store']]);
+	Route::resource('users', UserController::class, ['only' => ['index', 'store', 'destroy']]);
 });
