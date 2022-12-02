@@ -17438,6 +17438,21 @@
         {
                         return \Illuminate\Support\Collection::debug();
         }
+                    /**
+         * Paginate a standard Laravel Collection.
+         *
+         * @param int $perPage
+         * @param int $total
+         * @param int $page
+         * @param string $pageName
+         * @return array 
+         * @see \App\Providers\AppServiceProvider::register()
+         * @static 
+         */ 
+        public static function paginate($perPage, $total = null, $page = null, $pageName = 'page')
+        {
+                        return \Illuminate\Support\Collection::paginate($perPage, $total, $page, $pageName);
+        }
          
     }
      

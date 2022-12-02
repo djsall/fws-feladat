@@ -49,10 +49,12 @@ namespace App\Models{
  * @property string $name
  * @property string $description
  * @property string $status
+ * @property int $owner_id
  * @property int $created_by
  * @property int $project_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $owner
  * @property-read \App\Models\Project $project
  * @method static \Database\Factories\TicketFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newModelQuery()
@@ -63,6 +65,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereOwnerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
