@@ -66,7 +66,7 @@ class ProjectController extends Controller {
 		$data = $request->validate([
 			'name'        => 'required',
 			'description' => 'required',
-			'status'      => 'in:$statuses',
+			'status'      => 'required|in:' . $statuses,
 			'contact'     => 'required|array',
 			'contact.*'   => 'int'
 		]);
@@ -152,7 +152,7 @@ class ProjectController extends Controller {
 		$data = $request->validate([
 			'name'        => 'required',
 			'description' => 'required',
-			'status'      => 'in:$statuses',
+			'status'      => 'required|in:' . $statuses,
 			'contact'     => 'required|array',
 			'contact.*'   => 'int'
 		]);
@@ -185,7 +185,9 @@ class ProjectController extends Controller {
 		$projectInstance = Project::find($project);
 		if ($projectInstance->contacts->count() > 0)
 			$projectInstance?->contacts()->detach();
-		$projectInstance?->delete();
+		if (!$projectInstance->tickets()->count() > 0)
+			$projectInstance?->delete();
+
 
 		return route('index');
 	}
