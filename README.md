@@ -1,5 +1,11 @@
 # how to install
 
+## Requirements
+
+-   composer
+-   php 8.x
+-   node/npm
+
 Install dependencies on composer
 
 ```
@@ -41,6 +47,12 @@ Generate the test data for the application
 
 ```
 php artisan db:seed
+```
+
+Run the integrated php server, the application url will be visible inside your terminal
+
+```
+php artisan serve
 ```
 
 Every account generated can be logged into with "password" and their e-mail, which you can read from your database.
