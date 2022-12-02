@@ -16,7 +16,10 @@ class UserController extends Controller {
 		//
 		if (Auth::user()->isAdmin())
 			return view("users.index")->with([
-				"users" => User::whereIn("role", ["employee", "manager"])->get()
+				"users" => User::whereIn("role", [
+					"employee",
+					"manager"
+				])->get()
 			]);
 		return redirect(route("projects.index"));
 	}
@@ -76,9 +79,9 @@ class UserController extends Controller {
 	 * Remove the specified resource from storage.
 	 *
 	 * @param int $id
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+	 * @throws \Throwable
 	 */
 	public function destroy($id) {
-		//
 	}
 }
