@@ -21,6 +21,7 @@ namespace App\Models{
  * @property int $user_id Tulajdonos user ID-je.
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $contacts
  * @property-read int|null $contacts_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Ticket[] $tickets
@@ -29,14 +30,18 @@ namespace App\Models{
  * @method static \Database\Factories\ProjectFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Project onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|Project withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Project withoutTrashed()
  */
 	class Project extends \Eloquent {}
 }
@@ -54,14 +59,17 @@ namespace App\Models{
  * @property int $project_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\User|null $owner
  * @property-read \App\Models\Project $project
  * @method static \Database\Factories\TicketFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Ticket onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket query()
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereName($value)
@@ -69,6 +77,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereProjectId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ticket whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Ticket withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Ticket withoutTrashed()
  */
 	class Ticket extends \Eloquent {}
 }
