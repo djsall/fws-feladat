@@ -45,6 +45,6 @@ class Ticket extends Model {
 	}
 
 	public function getFormattedCreatedAt() {
-		return $this->created_at->format('Y.m.d - H:i');
+		return $this->created_at->format('Y.m.d. H:i');
 	}
 }
