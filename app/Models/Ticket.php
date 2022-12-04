@@ -43,4 +43,8 @@ class Ticket extends Model {
 	public function owner() {
 		return $this->hasOne(User::class, 'id', 'owner_id');
 	}
+
+	public function getFormattedCreatedAt() {
+		return $this->created_at->format('Y.m.d - H:i');
+	}
 }

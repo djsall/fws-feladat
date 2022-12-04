@@ -47,4 +47,7 @@ class Project extends Model {
 	public static function getPossibleStatuses() {
 		return self::$statuses;
 	}
+	public function getFormattedCreatedAt(){
+		return $this->created_at->format('Y.m.d. H:i');
+	}
 }

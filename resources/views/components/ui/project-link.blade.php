@@ -1,5 +1,5 @@
 <div>
-	<div class="d-flex mb-3">
+	<div class="d-flex mb-0">
 		<div class="w-50">
 			<p class="mb-0 fw-bold">
 				Projekt:

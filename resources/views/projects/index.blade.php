@@ -36,6 +36,7 @@
 						<x-ui.tickets :project="$project"/>
 						<x-ui.project-owner :project="$project"/>
 						<x-ui.contacts :project="$project"/>
+						<x-ui.created-at :project="$project"/>
 						<p class="card-text mb-2">
 							{{$project->description}}
 						</p>
