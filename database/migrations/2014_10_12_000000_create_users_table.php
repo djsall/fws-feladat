@@ -21,7 +21,7 @@ return new class extends Migration {
 				'admin',
 				'manager',
 				'employee'
-			]);
+			])->default('employee');
 			$table->rememberToken();
 			$table->timestamps();
 		});

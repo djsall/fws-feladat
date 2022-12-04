@@ -9,8 +9,8 @@
 	<!-- Fonts -->
 	<link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
-	@vite('resources/js/app.js')
-	<!-- Styles -->
+@vite('resources/js/app.js')
+<!-- Styles -->
 
 	<style>
 		body {
@@ -51,7 +51,11 @@
 						</span>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ url('/logout') }}"> Logout </a>
+						<a class="nav-link" href="{{ url('/logout') }}"> Kijelentkezés </a>
+					</li>
+				@else
+					<li class="nav-item">
+						<a href="{{ route("register") }}" class="nav-link">Regisztráció</a>
 					</li>
 				@endif
 
