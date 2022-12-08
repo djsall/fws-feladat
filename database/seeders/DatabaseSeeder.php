@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder {
 		Project::factory(20)->has(User::factory()->count(3))->create();
 		Ticket::factory(20)->create();
 
-		foreach (Project::all() as $project){
+		foreach (Project::all() as $project) {
 			$project->contacts()->attach(User::find(rand(2, User::count())));
 		}
 	}
