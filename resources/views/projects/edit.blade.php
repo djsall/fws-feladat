@@ -55,7 +55,6 @@
 			@if($project->tickets()->count() == 0)
 			let deleteBtn = $("#delete-btn");
 			const url = `{!! route("projects.destroy", $project->id) !!}`;
-			const projectId = {!! $project->id !!};
 
 			deleteBtn.click(function () {
 
